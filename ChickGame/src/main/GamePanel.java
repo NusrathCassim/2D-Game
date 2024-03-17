@@ -1,4 +1,5 @@
 package main;
+import object.MainObject;
 import tile.tileManager;
 import Character.Player;
 import java.awt.Color;
@@ -25,11 +26,11 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler KeyH = new KeyHandler();
     Thread gameThread;
     public checkCollision checker = new checkCollision(this);
+    public Object_Methods methods = new Object_Methods(this);
     public Player player = new Player(this, KeyH);
+    public MainObject obj[] = new MainObject[10]; //display upto 10 object at the same time
     
-    
-  
-    
+   
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -39,6 +40,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
                 
     }
+    
+    public void setupObject() {
+    	methods.setObject();
+    }
+    
+    
+    
     public void startGameThread() {
     	gameThread = new Thread(this);
     	gameThread.start();
@@ -81,7 +89,18 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+	
+		
+		//tile
 		tile.draw(g2);
+		
+		//object
+		for(int i =0; i<obj.length; i++) {
+			if(obj[i] != null) {
+				obj[i].draw(g2, this);
+			}
+		}
+		//player
 		player.draw(g2);
 		g2.dispose();
 		
