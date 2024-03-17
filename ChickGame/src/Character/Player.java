@@ -2,6 +2,7 @@ package Character;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -20,12 +21,19 @@ public class Player extends Character {
 			this.KeyH = KeyH;
 			setDefaultValue();
 			getPlayerImage();
+			
+			//assigning collision area
+			protectedArea = new Rectangle();
+			protectedArea.x = 8;
+			protectedArea.y = 8;
+			protectedArea.width = 20; 
+			protectedArea.height = 20;
 		}
 		
 		public void setDefaultValue() {
 			x = 100;
 			y = 100;
-			speed = 4;
+			speed = 3;
 			Direction = "down";
 		}
 		public void getPlayerImage() {
@@ -54,22 +62,41 @@ public class Player extends Character {
 		if(KeyH.upPressed == true ||KeyH.downPressed == true|| KeyH.leftPressed == true ||
 					KeyH.rightPressed==true){
 			if(KeyH.upPressed == true) {
-				Direction = "up";
-				y-= speed;	
+				Direction = "up";					
 			}
 			if(KeyH.downPressed == true) {
-				Direction = "down";
-				y+= speed;	
+				Direction = "down";				
 			}
 			if(KeyH.leftPressed == true) {
-				Direction = "left";
-				x-= speed;	
+				Direction = "left";				
 			}
 			if(KeyH.rightPressed == true) {
 				Direction = "right";
-				x+= speed;	
 			}
-
+			
+			//collision
+			collisionOn = false;
+			gp.checker.checkTile(this);
+			//if collision is false player can move
+			if(collisionOn == false) {
+				switch(Direction) {
+				case "up":
+					y-= speed;
+					break;
+				case "down":
+					y+= speed;	
+					break;
+				case "left":
+					x-= speed;	
+					break;
+				case "right":
+					x+= speed;	
+					break;
+					
+				}
+			}
+			
+			
 			spriteCounter++;
 			if(spriteCounter > 10) {
 				if(spriteNum == 1) {
