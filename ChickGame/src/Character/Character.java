@@ -19,5 +19,6 @@ public class Character {
 	
 	//colliding
 	public Rectangle protectedArea;
+	public int protectedAreaDeafultX, protectedAreaDeafultY;
 	public boolean collisionOn = false;
 }

@@ -56,6 +56,82 @@ public class checkCollision {
 			break;	
 		
 		}
+		}
+		
+		
+		public int checkObject(Character Character, boolean player) {
+			int index = 999;
+			
+			for(int i =0; i<gp.obj.length; i++) {
+				if(gp.obj[i] != null ) {
+					//characters solid area position
+					Character.protectedArea.x = Character.x + Character.protectedArea.x;
+					Character.protectedArea.y = Character.y + Character.protectedArea.y;
+					
+					
+					//objects solid area position
+					gp.obj[i].protectedArea.x = gp.obj[i].obj_x + gp.obj[i].protectedArea.x;
+					gp.obj[i].protectedArea.y = gp.obj[i].obj_y + gp.obj[i].protectedArea.y;
+					
+					
+					switch(Character.Direction) {
+					case "up":
+						Character.protectedArea.y -= Character.speed;
+						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
+							if(gp.obj[i].collision == true) {
+								Character.collisionOn = true;
+							}
+							if(player == true) {
+								index = i;
+							}
+						}
+						break;
+					case "down":
+						Character.protectedArea.y += Character.speed;
+						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
+							if(gp.obj[i].collision == true) {
+								Character.collisionOn = true;
+							}
+							if(player == true) {
+								index = i;
+							}
+						}
+						break;
+					case "left":
+						Character.protectedArea.x -= Character.speed;
+						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
+							if(gp.obj[i].collision == true) {
+								Character.collisionOn = true;
+							}
+							if(player == true) {
+								index = i;
+							}
+						}
+						break;
+					case "right":
+						Character.protectedArea.x += Character.speed;
+						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
+							if(gp.obj[i].collision == true) {
+								Character.collisionOn = true;
+							}
+							if(player == true) {
+								index = i;
+							}
+						}
+						break;
+					}
+					Character.protectedArea.x = Character.protectedAreaDeafultX;
+					Character.protectedArea.y = Character.protectedAreaDeafultY;
+					gp.obj[i].protectedArea.x = gp.obj[i].protectedAreaDeafultX;
+					gp.obj[i].protectedArea.y = gp.obj[i].protectedAreaDeafultY;
+				}
+			}
+			
+			return index;
+		}
+		
+		
+		
 	}
 	
-}
+

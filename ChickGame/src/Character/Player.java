@@ -15,6 +15,8 @@ public class Player extends Character {
 	
 	GamePanel gp;
 	KeyHandler KeyH;
+	
+	int Numrocks = 0;
 		
 		public Player(GamePanel gp, KeyHandler KeyH) {
 			this.gp = gp;
@@ -26,6 +28,8 @@ public class Player extends Character {
 			protectedArea = new Rectangle();
 			protectedArea.x = 8;
 			protectedArea.y = 8;
+			protectedAreaDeafultX = protectedArea.x;
+			protectedAreaDeafultY = protectedArea.y;
 			protectedArea.width = 20; 
 			protectedArea.height = 20;
 		}
@@ -77,6 +81,12 @@ public class Player extends Character {
 			//collision
 			collisionOn = false;
 			gp.checker.checkTile(this);
+			//check object collision
+			int objIndex = gp.checker.checkObject(this, true);
+			pickupObject(objIndex);
+			
+			
+			
 			//if collision is false player can move
 			if(collisionOn == false) {
 				switch(Direction) {
@@ -111,6 +121,22 @@ public class Player extends Character {
 		}
 			
 		}
+		public void pickupObject(int i) {
+			if(i != 999) {
+//				gp.obj[i] = null; //delete the object we touch
+				String Object_Name = gp.obj[i].name;
+				
+				switch(Object_Name) {
+				case "rock_lv1":
+					Numrocks++;
+					gp.obj[i] = null;
+				}
+				
+			}
+		}
+		
+		
+		
 		
 		public void draw(Graphics2D g2) {
 			BufferedImage image = null;
