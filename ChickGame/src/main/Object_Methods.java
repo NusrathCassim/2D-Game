@@ -10,7 +10,7 @@ public class Object_Methods {
 	
 	public void setObject() {
 		gp.obj[0] = new Object_rock();
-		gp.obj[0].obj_x = 1;
+		gp.obj[0].obj_x = 1*gp.tileSize;
 		gp.obj[0].obj_y = 6*gp.tileSize;
 		
 		gp.obj[1] = new Object_rock(); 

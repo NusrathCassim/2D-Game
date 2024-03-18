@@ -24,6 +24,7 @@ public class tileManager {
 		loadingMap("/map/map.txt");
 	}
 	
+	
 	public void getTileImage() {
 		//load the tile images
 		try {
