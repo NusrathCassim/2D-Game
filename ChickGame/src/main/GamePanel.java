@@ -22,14 +22,14 @@ public class GamePanel extends JPanel implements Runnable {
     
     
     int FPS = 60;
-    tileManager tile = new tileManager(this);
+    public tileManager tile = new tileManager(this);
     KeyHandler KeyH = new KeyHandler();
     Thread gameThread;
     public checkCollision checker = new checkCollision(this);
     public Object_Methods methods = new Object_Methods(this);
-    public Player player = new Player(this, KeyH);
-    public MainObject obj[] = new MainObject[10]; //display upto 10 object at the same time
-    
+    public Player player = new Player(this, KeyH, methods);
+    public MainObject obj[] = new MainObject[10]; //display up to 10 object at the same time
+    //public MainObject special_obj[] = new MainObject[10]; //for special objects
    
     
     public GamePanel(){
@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     
     public void setupObject() {
     	methods.setObject();
+    	
     }
     
     
@@ -100,6 +101,10 @@ public class GamePanel extends JPanel implements Runnable {
 				obj[i].draw(g2, this);
 			}
 		}
+		//special objects
+		
+		
+		
 		//player
 		player.draw(g2);
 		g2.dispose();

@@ -10,17 +10,19 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.Object_Methods;
 
 public class Player extends Character {
 	
 	GamePanel gp;
 	KeyHandler KeyH;
-	
+	Object_Methods om;
 	int Numrocks = 0;
 		
-		public Player(GamePanel gp, KeyHandler KeyH) {
+		public Player(GamePanel gp, KeyHandler KeyH,Object_Methods om ) {
 			this.gp = gp;
 			this.KeyH = KeyH;
+			this.om =om;
 			setDefaultValue();
 			getPlayerImage();
 			
@@ -130,6 +132,9 @@ public class Player extends Character {
 				case "rock_lv1":
 					Numrocks++;
 					gp.obj[i] = null;
+					om.setObject();
+					//newObject();
+					break;
 				}
 				
 			}

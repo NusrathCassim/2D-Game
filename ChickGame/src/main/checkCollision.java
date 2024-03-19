@@ -124,6 +124,7 @@ public class checkCollision {
 					Character.protectedArea.y = Character.protectedAreaDeafultY;
 					gp.obj[i].protectedArea.x = gp.obj[i].protectedAreaDeafultX;
 					gp.obj[i].protectedArea.y = gp.obj[i].protectedAreaDeafultY;
+					
 				}
 			}
 			

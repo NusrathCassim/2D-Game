@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
 import javax.imageio.ImageIO;
-
-import tile.Tile;
 import main.GamePanel;
 
 public class tileManager {
@@ -30,7 +28,7 @@ public class tileManager {
 		try {
 			tile[0] = new Tile();
 			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-			tile[0].collision = true;
+		//	tile[0].collision = true;
 			
 			
 			tile[1] = new Tile();
@@ -46,11 +44,11 @@ public class tileManager {
 			//water parts
 			tile[4] = new Tile();
 			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/upGreen.png"));
-			tile[4].collision = true;
+		//	tile[4].collision = true;
 			
 			tile[5] = new Tile();
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/downGreen.png"));
-			tile[5].collision = true;
+		//	tile[5].collision = true;
 			
 			tile[6] = new Tile();
 			tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/WaterFlower.png"));
@@ -186,4 +184,29 @@ public class tileManager {
 			}
 		}
 	}
+	
+	//get the reachable tiles
+	
+	public Tile[] getreachableTiles() {
+		int count = 0;
+	    for (int i = 0; i < tile.length; i++) {
+	        if (!tile[i].collision) {
+	            count++;
+	        }
+	    }
+
+	    Tile[] reachableTiles = new Tile[count];
+	    int index = 0;
+	    for (int i = 0; i < tile.length; i++) {
+	        if (!tile[i].collision) {
+	            reachableTiles[index] = tile[i];
+	            index++;
+	        }
+	    }
+
+	    return reachableTiles;
+	}
+	
+	
+	
 }
