@@ -22,8 +22,9 @@ public class checkCollision {
 		
 		case "up":
 			ChTopRow = (ChTopY - Character.speed)/gp.tileSize;
-			tileNum1 = gp.tile.mapT_Num[ChLeftCol][ChTopRow];
+			tileNum1 = gp.tile.mapT_Num[ChLeftCol][ChTopRow]; //number that i have assigned for the tiles ex flower tile=1
 			tileNum2 = gp.tile.mapT_Num[ChrightCol][ChTopRow];
+			
 			if(gp.tile.tile[tileNum1].collision == true ||gp.tile.tile[tileNum2].collision == true) {
 				Character.collisionOn = true;	
 			}
@@ -56,6 +57,7 @@ public class checkCollision {
 			break;	
 		
 		}
+		
 		}
 		
 		

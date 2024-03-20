@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
     public checkCollision checker = new checkCollision(this);
     public Object_Methods methods = new Object_Methods(this);
     public Player player = new Player(this, KeyH, methods);
-    public MainObject obj[] = new MainObject[10]; //display up to 10 object at the same time
+    public MainObject obj[] = new MainObject[20]; //display up to 10 object at the same time
     //public MainObject special_obj[] = new MainObject[10]; //for special objects
    
     

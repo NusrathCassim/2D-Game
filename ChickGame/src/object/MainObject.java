@@ -17,15 +17,9 @@ public class MainObject {
 	
 	
 	public void draw(Graphics2D g2, GamePanel gp) {
-		
-//		if(obj_x + gp.tileSize > gp.player.x &&
-//			obj_x - gp.tileSize < gp.player.x &&
-//			obj_y + gp.tileSize > gp.player.y &&
-//			obj_y - gp.tileSize < gp.player.y ) {}
 			
-		  
 			g2.drawImage(image, obj_x, obj_y,gp.tileSize, gp.tileSize, null);
-
+			
 	}
 	
 }

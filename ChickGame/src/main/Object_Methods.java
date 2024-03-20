@@ -2,8 +2,6 @@ package main;
 
 import java.util.Random;
 import object.Object_rock;
-import tile.Tile;
-import tile.tileManager;
 
 public class Object_Methods {
 	GamePanel gp;
@@ -16,20 +14,33 @@ public class Object_Methods {
 
 	
 	public void setObject() {
-		gp.obj[0] = new Object_rock();
-		gp.obj[0].obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
-		gp.obj[0].obj_y = (random.nextInt((int)(gp.screenHeight/gp.tileSize)))*gp.tileSize;
-//		tileManager manager = new tileManager(gp);
-//		  gp.obj[0] = new Object_rock();
-//
-//	        // Get reachable tiles
-//	        Tile[] reachableTiles = manager.getreachableTiles();
-//
-//
-//	        // Generate random coordinates only from reachable tiles
-//	        int randomIndex =  random.nextInt(reachableTiles.length);
-//	        gp.obj[0].obj_x = randomIndex* gp.tileSize;
-//	        gp.obj[0].obj_y = randomIndex * gp.tileSize;
+//		
+//		int obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
+//		int obj_y = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
+
+//		gp.obj[0] = new Object_rock();
+//		gp.obj[0].obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
+//		gp.obj[0].obj_y = (random.nextInt((int)(gp.screenHeight/gp.tileSize)))*gp.tileSize;
+	
+		boolean validPositionFound = false;
+	    do {
+	        int obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
+	        int obj_y = (random.nextInt((int)(gp.screenHeight/gp.tileSize)))*gp.tileSize;
+
+	        // Check if the random position is on a tile with number 3
+	        int randomTileNumX = gp.tile.mapT_Num[obj_x / gp.tileSize][obj_y / gp.tileSize];
+	        int randomTileNumY = gp.tile.mapT_Num[obj_x / gp.tileSize][obj_y / gp.tileSize]; // Check the tile below as well
+	        if (randomTileNumX == 3 || randomTileNumY == 3) {
+	           
+	                gp.obj[0] = new Object_rock();
+	                gp.obj[0].obj_x = obj_x;
+	                gp.obj[0].obj_y = obj_y;
+	                validPositionFound = true;
+	            }
+	        
+	    } while (!validPositionFound);
+
+	
 	
 	}
 	

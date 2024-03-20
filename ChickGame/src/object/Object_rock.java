@@ -8,7 +8,8 @@ public class Object_rock extends MainObject{
 	public Object_rock() {
 		name = "rock_lv1";
 		try {
-			image = ImageIO.read(getClass().getResource("/objects/Rock.png"));
+			image = ImageIO.read(getClass().getResource("/objects/FireRock.png"));
+			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

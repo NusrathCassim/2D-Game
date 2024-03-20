@@ -11,7 +11,7 @@ import main.GamePanel;
 
 public class tileManager {
 	GamePanel gp;
-	public Tile[] tile;
+	public Tile[] tile; //tile is the name
 	public int mapT_Num[][];
 	
 	public tileManager(GamePanel gp) {
@@ -28,7 +28,7 @@ public class tileManager {
 		try {
 			tile[0] = new Tile();
 			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/grass.png"));
-		//	tile[0].collision = true;
+			//tile[0].collision = true;
 			
 			
 			tile[1] = new Tile();
@@ -131,6 +131,8 @@ public class tileManager {
 			
 			tile[30] = new Tile();
 			tile[30].image = ImageIO.read(getClass().getResourceAsStream("/tiles/henyard.png"));	
+			
+
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -185,27 +187,8 @@ public class tileManager {
 		}
 	}
 	
-	//get the reachable tiles
+
 	
-	public Tile[] getreachableTiles() {
-		int count = 0;
-	    for (int i = 0; i < tile.length; i++) {
-	        if (!tile[i].collision) {
-	            count++;
-	        }
-	    }
-
-	    Tile[] reachableTiles = new Tile[count];
-	    int index = 0;
-	    for (int i = 0; i < tile.length; i++) {
-	        if (!tile[i].collision) {
-	            reachableTiles[index] = tile[i];
-	            index++;
-	        }
-	    }
-
-	    return reachableTiles;
-	}
 	
 	
 	

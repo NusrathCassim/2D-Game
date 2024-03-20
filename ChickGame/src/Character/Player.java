@@ -39,7 +39,7 @@ public class Player extends Character {
 		public void setDefaultValue() {
 			x = 100;
 			y = 100;
-			speed = 3;
+			speed = 4;
 			Direction = "down";
 		}
 		public void getPlayerImage() {
