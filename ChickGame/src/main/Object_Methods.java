@@ -1,6 +1,8 @@
 package main;
 
 import java.util.Random;
+
+import object.Object_blueRock;
 import object.Object_rock;
 
 public class Object_Methods {
@@ -17,11 +19,12 @@ public class Object_Methods {
 //		
 //		int obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
 //		int obj_y = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
-
-//		gp.obj[0] = new Object_rock();
-//		gp.obj[0].obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
-//		gp.obj[0].obj_y = (random.nextInt((int)(gp.screenHeight/gp.tileSize)))*gp.tileSize;
-	
+		 
+//	    gp.obj[1] = new Object_blueRock();
+//    	gp.obj[1].obj_x = 11*gp.tileSize;
+//        gp.obj[1].obj_y = 4*gp.tileSize;
+        
+        
 		boolean validPositionFound = false;
 	    do {
 	        int obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
@@ -39,7 +42,8 @@ public class Object_Methods {
 	            }
 	        
 	    } while (!validPositionFound);
-
+	   
+	    	
 	
 	
 	}

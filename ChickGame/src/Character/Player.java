@@ -37,7 +37,7 @@ public class Player extends Character {
 		}
 		
 		public void setDefaultValue() {
-			x = 100;
+			x = 100; //position of the player
 			y = 100;
 			speed = 4;
 			Direction = "down";
@@ -88,23 +88,33 @@ public class Player extends Character {
 			pickupObject(objIndex);
 			
 			
-			
+			int bottom_player = y +gp.tileSize;
+			 int right_player = x + gp.tileSize;
 			//if collision is false player can move
 			if(collisionOn == false) {
+				//this if statement under each case, will keep the sprite inside the display
 				switch(Direction) {
 				case "up":
+				if(y > 0) {
 					y-= speed;
-					break;
+					break; }
 				case "down":
+					
+					if(bottom_player < gp.screenHeight) {
 					y+= speed;	
 					break;
+					}
 				case "left":
-					x-= speed;	
-					break;
+					if(x >  0) {
+						x-= speed;	
+						break;							
+					}
+					
 				case "right":
+					if(right_player < gp.screenWidth) {
 					x+= speed;	
 					break;
-					
+					}
 				}
 			}
 			
@@ -134,6 +144,10 @@ public class Player extends Character {
 					gp.obj[i] = null;
 					om.setObject();
 					//newObject();
+					break;
+					
+				case "rock_lv2":
+					gp.obj[i] = null;
 					break;
 				}
 				

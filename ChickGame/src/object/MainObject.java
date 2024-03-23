@@ -17,7 +17,7 @@ public class MainObject {
 	
 	
 	public void draw(Graphics2D g2, GamePanel gp) {
-			
+		
 			g2.drawImage(image, obj_x, obj_y,gp.tileSize, gp.tileSize, null);
 			
 	}
