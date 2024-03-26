@@ -1,4 +1,5 @@
 package object;
+import main.ToolBox;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
@@ -14,7 +15,7 @@ public class MainObject {
 	public int 	protectedAreaDeafultX =0;
 	public int protectedAreaDeafultY = 0;
 	Random random;
-	
+	ToolBox tool = new ToolBox();
 	
 	public void draw(Graphics2D g2, GamePanel gp) {
 		

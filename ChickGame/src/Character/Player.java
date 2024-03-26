@@ -11,13 +11,14 @@ import javax.imageio.ImageIO;
 import main.GamePanel;
 import main.KeyHandler;
 import main.Object_Methods;
+import main.ToolBox;
 
 public class Player extends Character {
 	
 	GamePanel gp;
 	KeyHandler KeyH;
 	Object_Methods om;
-	int Numrocks = 0;
+	public int Numrocks = 0;
 		
 		public Player(GamePanel gp, KeyHandler KeyH,Object_Methods om ) {
 			this.gp = gp;
@@ -28,8 +29,8 @@ public class Player extends Character {
 			
 			//assigning collision area
 			protectedArea = new Rectangle();
-			protectedArea.x = 8;
-			protectedArea.y = 8;
+			protectedArea.x = 6;
+			protectedArea.y = 6;
 			protectedAreaDeafultX = protectedArea.x;
 			protectedAreaDeafultY = protectedArea.y;
 			protectedArea.width = 20; 
@@ -37,32 +38,41 @@ public class Player extends Character {
 		}
 		
 		public void setDefaultValue() {
-			x = 100; //position of the player
-			y = 100;
+			x = 200; //position of the player
+			y = 200;
 			speed = 4;
 			Direction = "down";
 		}
 		public void getPlayerImage() {
+		
+				up1 =setup("b1");
+				up2 = setup("b2");
+				up3 = setup("b3");
+				down1 =setup("f1");
+				down2= setup("f2");
+				down3 =setup("f3");
+				left1 = setup("L1");
+				left2 = setup("L2");
+				left3 = setup("L3");
+				right1 =setup("R1");
+				right2 =setup("R2");
+				right3 = setup("R3");
+				
+			}
+		public BufferedImage setup(String imageName) {
+			ToolBox tool = new ToolBox();
+			BufferedImage Image = null;
 			try {
-				up1 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/b1.png"));
-				up2 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/b2.png"));
-				up3 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/b3.png"));
-				down1 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/f1.png"));
-				down2= ImageIO.read(getClass().getResourceAsStream("/Mainplayer/f2.png"));
-				down3 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/f3.png"));
-				left1 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/L1.png"));
-				left2 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/L2.png"));
-				left3 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/L3.png"));
-				right1 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/R1.png"));
-				right2 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/R2.png"));
-				right3 = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/R3.png"));
-				
-				
-				
+				Image = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/"+ imageName +".png"));
+				Image = tool.scaleImage(Image, gp.tileSize, gp.tileSize);
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
+			return Image;
 		}
+		
+		
+		
 		
 		public void update() {
 		if(KeyH.upPressed == true ||KeyH.downPressed == true|| KeyH.leftPressed == true ||
@@ -140,15 +150,17 @@ public class Player extends Character {
 				
 				switch(Object_Name) {
 				case "rock_lv1":
+					gp.playSE(4);
 					Numrocks++;
+					if(Numrocks == 1) {
+						gp.ui.showMessage("This rock make Extra damage to the Monster");
+						
+					}
 					gp.obj[i] = null;
-					om.setObject();
-					//newObject();
-					break;
 					
-				case "rock_lv2":
-					gp.obj[i] = null;
+					om.setObject(); //new rock
 					break;
+				
 				}
 				
 			}
@@ -207,7 +219,7 @@ public class Player extends Character {
 				}
 				break;	
 			}
-			g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, x, y, null);
 			
 		}
 
