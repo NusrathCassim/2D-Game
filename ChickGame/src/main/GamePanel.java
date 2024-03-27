@@ -23,16 +23,16 @@ public class GamePanel extends JPanel implements Runnable {
     
     int FPS = 60;
     public tileManager tile = new tileManager(this);
-    KeyHandler KeyH = new KeyHandler();
+    KeyHandler KeyH = new KeyHandler(this);
     //sound class
     Sound sound = new Sound();
     
     
-    
+    //collision
    
     public checkCollision checker = new checkCollision(this);
     public Object_Methods methods = new Object_Methods(this);
-    //ui
+    //UI
     public ScreenUI ui = new ScreenUI(this);
     
     Thread gameThread;
@@ -42,6 +42,14 @@ public class GamePanel extends JPanel implements Runnable {
     public MainObject obj[] = new MainObject[20]; //display up to 10 object at the same time
     //public MainObject special_obj[] = new MainObject[10]; //for special objects
    
+    
+    //game state
+    public int gameState;
+    public final int playMode = 1;
+    public final int pauseMode= 2;
+    
+    
+    
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -54,7 +62,8 @@ public class GamePanel extends JPanel implements Runnable {
     
     public void setupObject() {
     	methods.setObject();
-    	//playMusic(0);
+    	//playMusic(1);
+    	gameState = playMode;
     }
     
     
@@ -95,7 +104,13 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void update() {
-		player.update();
+		if(gameState == playMode)
+		{
+			player.update();
+		}
+		if(gameState == pauseMode) {
+			
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
