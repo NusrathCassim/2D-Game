@@ -2,6 +2,7 @@ package main;
 import object.MainObject;
 import tile.tileManager;
 import Character.Player;
+import Character.Character;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, KeyH, methods);
     public MainObject obj[] = new MainObject[20]; //display up to 10 object at the same time
     //public MainObject special_obj[] = new MainObject[10]; //for special objects
-   
+    public Character npc[] = new Character[10];
     
     //game state
     public int gameState;
@@ -62,6 +63,7 @@ public class GamePanel extends JPanel implements Runnable {
     
     public void setupObject() {
     	methods.setObject();
+    	methods.setNPC();
     	//playMusic(1);
     	gameState = playMode;
     }
@@ -107,6 +109,12 @@ public class GamePanel extends JPanel implements Runnable {
 		if(gameState == playMode)
 		{
 			player.update();
+			//NPC
+			for(int i = 0 ; i<npc.length; i++) {
+				if(npc[i]!= null) {
+					npc[i].update();
+				}
+			}
 		}
 		if(gameState == pauseMode) {
 			
@@ -127,7 +135,12 @@ public class GamePanel extends JPanel implements Runnable {
 				obj[i].draw(g2, this);
 			}
 		}
-		
+		//NPC
+		for(int i =0; i< npc.length; i++) {
+			if(npc[i] != null) {
+				npc[i].draw(g2);
+			}
+		}
 		//player
 		player.draw(g2);
 		//

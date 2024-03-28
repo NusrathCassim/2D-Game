@@ -133,7 +133,61 @@ public class checkCollision {
 			return index;
 		}
 		
-		
+		public int checknpc(Character Character, Character[] target) {
+int index = 999;
+			
+			for(int i =0; i<target.length; i++) {
+				if(target[i] != null ) {
+					//characters solid area position
+					Character.protectedArea.x = Character.x + Character.protectedArea.x;
+					Character.protectedArea.y = Character.y + Character.protectedArea.y;
+					
+					
+					//objects solid area position
+					target[i].protectedArea.x = target[i].x + target[i].protectedArea.x;
+					target[i].protectedArea.y = target[i].y + target[i].protectedArea.y;
+					
+					
+					switch(Character.Direction) {
+					case "up":
+						Character.protectedArea.y -= Character.speed;
+						if(Character.protectedArea.intersects(target[i].protectedArea)) {
+								Character.collisionOn = true;
+								index = i;	
+						}
+						break;
+					case "down":
+						Character.protectedArea.y += Character.speed;
+						if(Character.protectedArea.intersects(target[i].protectedArea)) {
+							Character.collisionOn = true;
+							index = i;	
+						}
+						break;
+					case "left":
+						Character.protectedArea.x -= Character.speed;
+						if(Character.protectedArea.intersects(target[i].protectedArea)) {
+							Character.collisionOn = true;
+							index = i;	
+						}
+						break;
+					case "right":
+						Character.protectedArea.x += Character.speed;
+						if(Character.protectedArea.intersects(target[i].protectedArea)) {
+							Character.collisionOn = true;
+							index = i;	
+						}
+						break;
+					}
+					Character.protectedArea.x = Character.protectedAreaDeafultX;
+					Character.protectedArea.y = Character.protectedAreaDeafultY;
+					target[i].protectedArea.x = target[i].protectedAreaDeafultX;
+					target[i].protectedArea.y = target[i].protectedAreaDeafultY;
+					
+				}
+			}
+			
+			return index;
+		}
 		
 	}
 	

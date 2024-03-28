@@ -15,13 +15,12 @@ import main.ToolBox;
 
 public class Player extends Character {
 	
-	GamePanel gp;
 	KeyHandler KeyH;
 	Object_Methods om;
 	public int Numrocks = 0;
 		
 		public Player(GamePanel gp, KeyHandler KeyH,Object_Methods om ) {
-			this.gp = gp;
+			super(gp);
 			this.KeyH = KeyH;
 			this.om =om;
 			setDefaultValue();
@@ -45,35 +44,21 @@ public class Player extends Character {
 		}
 		public void getPlayerImage() {
 		
-				up1 =setup("b1");
-				up2 = setup("b2");
-				up3 = setup("b3");
-				down1 =setup("f1");
-				down2= setup("f2");
-				down3 =setup("f3");
-				left1 = setup("L1");
-				left2 = setup("L2");
-				left3 = setup("L3");
-				right1 =setup("R1");
-				right2 =setup("R2");
-				right3 = setup("R3");
+				up1 =setup("/Mainplayer/b1");
+				up2 = setup("/Mainplayer/b2");
+				up3 = setup("/Mainplayer/b3");
+				down1 =setup("/Mainplayer/f1");
+				down2= setup("/Mainplayer/f2");
+				down3 =setup("/Mainplayer/f3");
+				left1 = setup("/Mainplayer/L1");
+				left2 = setup("/Mainplayer/L2");
+				left3 = setup("/Mainplayer/L3");
+				right1 =setup("/Mainplayer/R1");
+				right2 =setup("/Mainplayer/R2");
+				right3 = setup("/Mainplayer/R3");
 				
 			}
-		public BufferedImage setup(String imageName) {
-			ToolBox tool = new ToolBox();
-			BufferedImage Image = null;
-			try {
-				Image = ImageIO.read(getClass().getResourceAsStream("/Mainplayer/"+ imageName +".png"));
-				Image = tool.scaleImage(Image, gp.tileSize, gp.tileSize);
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-			return Image;
-		}
-		
-		
-		
-		
+			
 		public void update() {
 		if(KeyH.upPressed == true ||KeyH.downPressed == true|| KeyH.leftPressed == true ||
 					KeyH.rightPressed==true){
@@ -96,8 +81,9 @@ public class Player extends Character {
 			//check object collision
 			int objIndex = gp.checker.checkObject(this, true);
 			pickupObject(objIndex);
-			
-			
+			//NPC collision
+			int npcIndex = gp.checker.checknpc(this, gp.npc);
+			npcIntereact(npcIndex);
 			int bottom_player = y +gp.tileSize;
 			 int right_player = x + gp.tileSize;
 			//if collision is false player can move
@@ -165,8 +151,12 @@ public class Player extends Character {
 				
 			}
 		}
-		
-		
+		//INTEREACTION OF NPC WITH PLAYER
+		public void npcIntereact(int i){
+			if(i !=999) {
+				System.out.println("pagaya");
+			}
+		}
 		
 		
 		public void draw(Graphics2D g2) {

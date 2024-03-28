@@ -1,29 +1,18 @@
 package main;
 
 import java.util.Random;
-
-import object.Object_blueRock;
 import object.Object_rock;
+import Character.npc_figure_2;
+import Character.npc_figures;
 
 public class Object_Methods {
 	GamePanel gp;
-
 	Random random = new Random();
 	
 	public Object_Methods(GamePanel gp) {
 		this.gp = gp;
 	}
-
-	
-	public void setObject() {
-//		
-//		int obj_x = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
-//		int obj_y = (random.nextInt((int)(gp.screenWidth/gp.tileSize)))*gp.tileSize;
-		 
-//	    gp.obj[1] = new Object_blueRock();
-//    	gp.obj[1].obj_x = 11*gp.tileSize;
-//        gp.obj[1].obj_y = 4*gp.tileSize;
-        
+	public void setObject() {      
         
 		boolean validPositionFound = false;
 	    do {
@@ -42,12 +31,17 @@ public class Object_Methods {
 	            }
 	        
 	    } while (!validPositionFound);
-	   
-	    	
-	
 	
 	}
 	
-	
+	public void setNPC() {
+		gp.npc[0] = new npc_figures(gp);
+		gp.npc[0].x = gp.tileSize*3; 
+		gp.npc[0].y = gp.tileSize*9;
+		
+		gp.npc[1] = new npc_figure_2(gp);
+		gp.npc[1].x = gp.tileSize*5; 
+		gp.npc[1].y = gp.tileSize*10;
+	}
 	
 }
