@@ -1,14 +1,17 @@
 package main;
-import object.MainObject;
-import tile.tileManager;
-import Character.Player;
-import Character.Character;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
+
+import Character.Character;
+import Character.Player;
+import tile.tileManager;
 
 public class GamePanel extends JPanel implements Runnable {
     //SCREEN SETTINGS
@@ -40,10 +43,10 @@ public class GamePanel extends JPanel implements Runnable {
     
     
     public Player player = new Player(this, KeyH, methods);
-    public MainObject obj[] = new MainObject[20]; //display up to 10 object at the same time
-    //public MainObject special_obj[] = new MainObject[10]; //for special objects
+    public Character obj[] = new Character[20]; //display up to 10 object at the same time
     public Character npc[] = new Character[10];
-    
+    public Character Monster[] = new Character[20];
+    ArrayList<Character> Allentity = new ArrayList<>();
     //game state
     public int gameState;
     public final int playMode = 1;
@@ -64,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupObject() {
     	methods.setObject();
     	methods.setNPC();
+    	methods.setMonster();
     	//playMusic(1);
     	gameState = playMode;
     }
@@ -115,6 +119,12 @@ public class GamePanel extends JPanel implements Runnable {
 					npc[i].update();
 				}
 			}
+			//MONSTER
+			for(int i = 0 ; i<Monster.length; i++) {
+				if(Monster[i]!= null) {
+					Monster[i].update();
+				}
+			}
 		}
 		if(gameState == pauseMode) {
 			
@@ -128,7 +138,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		//tile
 		tile.draw(g2);
-		
+		Allentity.add(player);
 		//object
 		for(int i =0; i<obj.length; i++) {
 			if(obj[i] != null) {
@@ -138,14 +148,34 @@ public class GamePanel extends JPanel implements Runnable {
 		//NPC
 		for(int i =0; i< npc.length; i++) {
 			if(npc[i] != null) {
-				npc[i].draw(g2);
+				Allentity.add(npc[i]);
 			}
 		}
-		//player
-		player.draw(g2);
-		//
+		//MONSTER
+		for(int i = 0 ; i < Monster.length; i++) {
+			if(Monster[i]!= null) {
+				Allentity.add(Monster[i]);
+			}
+		}
+		//sorting
+		Collections.sort(Allentity, new Comparator<Character>() {
+
+			@Override
+			public int compare(Character c1, Character c2) {
+				int result = Integer.compare(c1.y, c2.y);
+				return result;
+			}
+
+		});
+		//DRAW
+		for(int i= 0; i < Allentity.size(); i++) {
+			Allentity.get(i).draw(g2);
+		}
+		for(int i= 0; i < Allentity.size(); i++) {
+			Allentity.remove(i);
+		}
 		ui.draw(g2);
-		g2.dispose();
+		
 		
 	}
 	public void playMusic(int i) {
