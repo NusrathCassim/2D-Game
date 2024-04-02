@@ -1,17 +1,12 @@
 package Character;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
 import main.Object_Methods;
-import main.ToolBox;
 
 public class Player extends Character {
 	
@@ -41,6 +36,10 @@ public class Player extends Character {
 			y = 200;
 			speed = 4;
 			Direction = "down";
+			//player life
+			MAXLIFE = 6;
+			LIFE = MAXLIFE;
+			
 		}
 		public void getPlayerImage() {
 		
@@ -82,8 +81,14 @@ public class Player extends Character {
 			int objIndex = gp.checker.checkObject(this, true);
 			pickupObject(objIndex);
 			//NPC collision
-			int npcIndex = gp.checker.checknpc(this, gp.npc);
+			int npcIndex = gp.checker.checkEntity(this, gp.npc);
 			npcIntereact(npcIndex);
+			//Monster Collision
+			int MonsterIndex = gp.checker.checkEntity(this, gp.Monster);
+			MonsterInteract(MonsterIndex);
+			
+			
+			
 			int bottom_player = y +gp.tileSize;
 			 int right_player = x + gp.tileSize;
 			//if collision is false player can move
@@ -127,7 +132,13 @@ public class Player extends Character {
 				spriteCounter = 0;
 			}
 		}
-			
+			if(invincible == true) {
+				invincibleCounter++;
+				if(invincibleCounter > 60) {
+					invincible = false;
+					invincibleCounter = 0;
+				}
+			}
 		}
 		public void pickupObject(int i) {
 			if(i != 999) {
@@ -143,7 +154,6 @@ public class Player extends Character {
 						
 					}
 					gp.obj[i] = null;
-					
 					om.setObject(); //new rock
 					break;
 				
@@ -157,7 +167,16 @@ public class Player extends Character {
 				System.out.println("pagaya");
 			}
 		}
-		
+		//Monster Touching
+		public void MonsterInteract(int i) {
+			if(i !=999) {
+				if(invincible == false) {
+					LIFE -=1;
+					invincible = true;
+				}
+				
+			}
+		}
 		
 		public void draw(Graphics2D g2) {
 			BufferedImage image = null;
