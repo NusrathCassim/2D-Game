@@ -1,23 +1,15 @@
 package object;
-
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import Character.Character;
 import main.GamePanel;
 
-public class Object_rock extends MainObject{
-	GamePanel gp;
+public class Object_rock extends Character{
+	
 	
 	public Object_rock(GamePanel gp) {
-		this.gp = gp;
+		super(gp);
 		
 		name = "rock_lv1";
-		try {
-			image = ImageIO.read(getClass().getResource("/objects/FireRock.png"));
-			tool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+		image = setup("/objects/FireRock");
+		
 	}
 }
