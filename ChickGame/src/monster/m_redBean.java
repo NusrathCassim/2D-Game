@@ -14,28 +14,46 @@ public class m_redBean extends Character{
 		speed = 1;
 		MAXLIFE = 3;
 		LIFE = MAXLIFE;
+		type = 2; 
 		
-		protectedArea.x = 9;
-		protectedArea.y = 15;
+		protectedArea.x = 8;
+		protectedArea.y = 18;
 		protectedArea.width = 30;
-		protectedArea.height = 33;
+		protectedArea.height = 32;
 		protectedAreaDeafultX = protectedArea.x;
 		protectedAreaDeafultY = protectedArea.y;
 		getImage();
 	}
 	public void getImage() {
-		left1 = setup("/monster/Monster1");
-		left2 = setup("/monster/Monster2");
-		left3 = setup("/monster/Monster3");
-		right1 = setup("/monster/MonsterR1");
-		right2 = setup("/monster/MonsterR2");
-		right3 = setup("/monster/MonsterR3");
+		up1 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		up2 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		up3 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		down1 = setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		down2= setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		down3 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		
+		left1 = setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		left2 = setup("/monster/Monster2", gp.tileSize, gp.tileSize);
+		left3 = setup("/monster/Monster3", gp.tileSize, gp.tileSize);
+		right1 = setup("/monster/MonsterR1", gp.tileSize, gp.tileSize);
+		right2 = setup("/monster/MonsterR2", gp.tileSize, gp.tileSize);
+		right3 = setup("/monster/MonsterR3", gp.tileSize, gp.tileSize);
 	}
 	//update methods here, sprite no are different from default one
 	public void update() {
 		setAction();
 		collisionOn = false;
-		gp.checker.checkTile(this);//pass the npc 
+		gp.checker.checkTile(this);
+		gp.checker.checkEntity(this, gp.Monster);
+		boolean contactPlayer = gp.checker.checkPlayer(this);
+		
+		
+		if(this.type == 2 && contactPlayer == true) {
+			if(gp.player.invincible == false) {
+				gp.player.LIFE -=1;
+				gp.player.invincible = true;
+			}
+		}
 		if(collisionOn == false) {
 			switch(Direction) {
 			case "left":
@@ -45,8 +63,14 @@ public class m_redBean extends Character{
 				if((x + gp.tileSize) < gp.screenWidth) {
 					x+= speed;	
 					break;
-			 
-				}
+					}
+			case "up":
+				y -=speed;
+				break;
+			case "down":
+				y += speed;
+				break;
+				
 			}
 		}
 		spriteCounter++;
@@ -64,17 +88,30 @@ public class m_redBean extends Character{
 //			}
 			spriteCounter = 0;
 		}
+		if(invincible == true) {
+			invincibleCounter++;
+			if(invincibleCounter > 40){ 
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
 	}
 	public void setAction() {
 		Timer++;
-		if(Timer == 240 ) {//4s
+		if(Timer == 120 ) {//4s
 			Random random = new Random();
 			int j = random.nextInt(100)+1;
-//			if(j <=50 ) {
-//				Direction = "right";
-//			}
-			if(j< 50 && j <= 100) {
+			if(j <=25 ) {
 				Direction = "left";
+			}
+			if(j> 25 && j <= 50) {
+				Direction = "right";
+			}
+			if(j> 50 && j <= 75) {
+				Direction = "up";
+			}
+			if(j> 75 && j <= 100) {
+				Direction = "down";
 			}
 			Timer = 0;
 		}

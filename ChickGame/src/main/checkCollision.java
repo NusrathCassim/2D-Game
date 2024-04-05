@@ -1,5 +1,6 @@
 package main;
 import Character.Character;
+
 public class checkCollision {
 	GamePanel gp;
 	public checkCollision(GamePanel gp) {
@@ -79,48 +80,24 @@ public class checkCollision {
 					switch(Character.Direction) {
 					case "up":
 						Character.protectedArea.y -= Character.speed;
-						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
-							if(gp.obj[i].collision == true) {
-								Character.collisionOn = true;
-							}
-							if(player == true) {
-								index = i;
-							}
-						}
 						break;
 					case "down":
 						Character.protectedArea.y += Character.speed;
-						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
-							if(gp.obj[i].collision == true) {
-								Character.collisionOn = true;
-							}
-							if(player == true) {
-								index = i;
-							}
-						}
 						break;
 					case "left":
 						Character.protectedArea.x -= Character.speed;
-						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
-							if(gp.obj[i].collision == true) {
-								Character.collisionOn = true;
-							}
-							if(player == true) {
-								index = i;
-							}
-						}
 						break;
 					case "right":
 						Character.protectedArea.x += Character.speed;
-						if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
-							if(gp.obj[i].collision == true) {
-								Character.collisionOn = true;
-							}
-							if(player == true) {
-								index = i;
-							}
-						}
 						break;
+					}
+					if(Character.protectedArea.intersects(gp.obj[i].protectedArea)) {
+						if(gp.obj[i].collision == true) {
+							Character.collisionOn = true;
+						}
+						if(player == true) {
+							index = i;
+						}
 					}
 					Character.protectedArea.x = Character.protectedAreaDeafultX;
 					Character.protectedArea.y = Character.protectedAreaDeafultY;
@@ -132,9 +109,9 @@ public class checkCollision {
 			
 			return index;
 		}
-		
-		public int checknpc(Character Character, Character[] target) {
-int index = 999;
+		//MOSTER AND
+		public int checkEntity(Character Character, Character[] target) {
+				int index = 999;
 			
 			for(int i =0; i<target.length; i++) {
 				if(target[i] != null ) {
@@ -149,34 +126,16 @@ int index = 999;
 					
 					
 					switch(Character.Direction) {
-					case "up":
-						Character.protectedArea.y -= Character.speed;
-						if(Character.protectedArea.intersects(target[i].protectedArea)) {
-								Character.collisionOn = true;
-								index = i;	
-						}
-						break;
-					case "down":
-						Character.protectedArea.y += Character.speed;
-						if(Character.protectedArea.intersects(target[i].protectedArea)) {
+					case "up":Character.protectedArea.y -= Character.speed; break;
+					case "down":Character.protectedArea.y += Character.speed; break;
+					case "left": Character.protectedArea.x -= Character.speed;break;
+					case "right":Character.protectedArea.x += Character.speed;break;
+					}
+					if(Character.protectedArea.intersects(target[i].protectedArea)){
+						if(target[i] != Character) {
 							Character.collisionOn = true;
 							index = i;	
 						}
-						break;
-					case "left":
-						Character.protectedArea.x -= Character.speed;
-						if(Character.protectedArea.intersects(target[i].protectedArea)) {
-							Character.collisionOn = true;
-							index = i;	
-						}
-						break;
-					case "right":
-						Character.protectedArea.x += Character.speed;
-						if(Character.protectedArea.intersects(target[i].protectedArea)) {
-							Character.collisionOn = true;
-							index = i;	
-						}
-						break;
 					}
 					Character.protectedArea.x = Character.protectedAreaDeafultX;
 					Character.protectedArea.y = Character.protectedAreaDeafultY;
@@ -187,6 +146,37 @@ int index = 999;
 			}
 			
 			return index;
+		}
+		
+		public boolean checkPlayer(Character Character) {
+			boolean contactPlayer = false;
+			//characters solid area position
+			Character.protectedArea.x = Character.x + Character.protectedArea.x;
+			Character.protectedArea.y = Character.y + Character.protectedArea.y;
+			
+			
+			//objects solid area position
+			gp.player.protectedArea.x = gp.player.x + gp.player.protectedArea.x;
+			gp.player.protectedArea.y = gp.player.y + gp.player.protectedArea.y;
+			
+			
+			switch(Character.Direction) {
+			case "up":Character.protectedArea.y -= Character.speed; break;
+			case "down":Character.protectedArea.y += Character.speed; break;
+			case "left": Character.protectedArea.x -= Character.speed;break;
+			case "right":Character.protectedArea.x += Character.speed;break;
+			}
+			if(Character.protectedArea.intersects(gp.player.protectedArea)){
+				
+					Character.collisionOn = true;
+					contactPlayer = true;
+				
+			}
+			Character.protectedArea.x = Character.protectedAreaDeafultX;
+			Character.protectedArea.y = Character.protectedAreaDeafultY;
+			gp.player.protectedArea.x =gp.player.protectedAreaDeafultX;
+			gp.player.protectedArea.y = gp.player.protectedAreaDeafultY;
+			return contactPlayer;
 		}
 		
 	}
