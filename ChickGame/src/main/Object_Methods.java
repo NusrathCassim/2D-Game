@@ -1,13 +1,17 @@
 package main;
 
 import java.util.Random;
-import object.Object_rock;
+
 import Character.npc_figure_2;
 import Character.npc_figures;
+import monster.m_redBean;
+import object.Object_rock;
+import object.specialObject;
 
 public class Object_Methods {
 	GamePanel gp;
 	Random random = new Random();
+
 	
 	public Object_Methods(GamePanel gp) {
 		this.gp = gp;
@@ -30,8 +34,14 @@ public class Object_Methods {
 	                validPositionFound = true;
 	            }
 	        
+	        
 	    } while (!validPositionFound);
 	
+	}
+	public void setSpecialobj() {
+		gp.obj[1] = new specialObject(gp);
+		gp.obj[1].obj_x = gp.tileSize*6;
+		gp.obj[1].obj_y= gp.tileSize*4;
 	}
 	
 	public void setNPC() {
@@ -42,6 +52,14 @@ public class Object_Methods {
 		gp.npc[1] = new npc_figure_2(gp);
 		gp.npc[1].x = gp.tileSize*5; 
 		gp.npc[1].y = gp.tileSize*10;
+		
 	}
-	
+	public void setMonster() {
+		gp.Monster[0] = new m_redBean(gp);
+		gp.Monster[0].x = gp.tileSize*17;
+		gp.Monster[0].y = gp.tileSize*11;
+		gp.Monster[1] = new m_redBean(gp);
+		gp.Monster[1].x = gp.tileSize*14;
+		gp.Monster[1].y = gp.tileSize*10;
+	}
 }

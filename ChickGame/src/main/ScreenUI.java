@@ -17,7 +17,7 @@ public class ScreenUI {
 	public boolean messageOn = false;
 	public String message = "";
 	int messageCounter =0;
-	
+	public int commandNum = 0;
 	
 	public ScreenUI(GamePanel gp) {
 		this.gp = gp;
@@ -40,14 +40,14 @@ public class ScreenUI {
 		this.g2 = g2;
 		g2.setFont(patrick);
 		g2.setColor(Color.WHITE);
-		g2.drawImage(rockImage, gp.tileSize/2,gp.tileSize/2,gp.tileSize, gp.tileSize, null);
-		g2.drawString("X "+ gp.player.Numrocks, 65, 60);
+		
 	
 	
 	//play mode
 		if(gp.gameState == gp.playMode) {
 			screenMsg();
 			drawHearts();
+			drawRocks();
 			
 				
 			}
@@ -56,10 +56,95 @@ public class ScreenUI {
 		if(gp.gameState == gp.pauseMode) {
 			pauseMode();
 			drawHearts();
-			}			
-	
+			drawRocks();
+			}	
+		
+	//game over
+		if(gp.gameState == gp.gameoverState) {
+			drawGameOverScreen();
+		}
+	//Main state
+		if(gp.gameState == gp.MainState) {
+			drawMainScreen();
+		}
+	}
+	public void drawMainScreen() {
+		g2.setColor(new Color(0,0,0));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		//Title
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80f));
+		String text = "Monster Crush";
+		int x = getCenterX(text);
+		int y = gp.tileSize*4;
+		
+		
+		//shadow
+		g2.setColor(Color.gray);
+		g2.drawString(text,  x+5,  y+5);
+		//main color
+		g2.setColor(Color.white);
+		g2.drawString(text, x, y);
+		//image
+		x = gp.screenWidth/2 - (gp.tileSize*2)/2;
+		y += gp.tileSize*2;
+		g2.drawImage(gp.player.down1,x,y,gp.tileSize*2, gp.tileSize*2, null);
+		
+		//Menu
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 40f));
+		text = "NEW GAME";
+		x = getCenterX(text);
+		y += gp.tileSize*3.5;
+		g2.drawString(text, x, y);
+		if(commandNum == 0) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+		//back to the title screen
+		text = "QUIT";
+		x = getCenterX(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNum == 1) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+		
+		
 	}
 	
+	public void drawGameOverScreen() {
+		g2.setColor(new Color(0,0,0,150));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		int x, y;
+		String text;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80f));
+		text = "GAME OVER!";
+		//shadow
+		g2.setColor(Color.black);
+		x = getCenterX(text);
+		y = gp.tileSize*4;
+		g2.drawString(text, x, y);
+		//main
+		g2.setColor(Color.white);
+		g2.drawString(text, x-4, y-4);
+		
+		//retry
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 50f));
+		text = "Retry";
+		x = getCenterX(text);
+		y += gp.tileSize*4;
+		g2.drawString(text, x, y);
+		if(commandNum == 0) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+		
+		//back to the title screen
+		text = "Quit";
+		x = getCenterX(text);
+		y += 55;
+		g2.drawString(text, x, y);
+		if(commandNum == 1) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+	}
 	public void screenMsg() {
 		if(messageOn == true) {
 			g2.setFont(g2.getFont().deriveFont((float) 25.0));
@@ -96,6 +181,13 @@ public class ScreenUI {
 			x += gp.tileSize;
 		 }
 	}
+	public void drawRocks() {
+		g2.drawImage(rockImage, gp.tileSize/2,gp.tileSize/2,gp.tileSize, gp.tileSize, null);
+		g2.drawString("X "+ gp.player.Numrocks, 65, 60);
+	}
+	
+	
+	
 	public void pauseMode() {
 		String text= "PAUSED!!";
 		int x = getCenterX(text);
