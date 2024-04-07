@@ -1,6 +1,7 @@
 package Character;
 
 import java.util.Random;
+
 import main.GamePanel;
 public class npc_figure_2 extends Character {
 
@@ -12,10 +13,10 @@ public class npc_figure_2 extends Character {
 	}
 	
 	public void getDarkChick() {
-		left1 = setup("/npc/chick4-2");
-		left2 = setup("/npc/chick4-3");
-		right1 = setup("/npc/chick4");
-		right2 = setup("/npc/chick4-0");
+		left1 = setup("/npc/chick4-2", gp.tileSize, gp.tileSize);
+		left2 = setup("/npc/chick4-3", gp.tileSize, gp.tileSize);
+		right1 = setup("/npc/chick4", gp.tileSize, gp.tileSize);
+		right2 = setup("/npc/chick4-0", gp.tileSize, gp.tileSize);
 	}
 	public void setAction() {
 		Timer++;

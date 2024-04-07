@@ -1,7 +1,8 @@
 package Character;
 
-import main.GamePanel;
 import java.util.Random;
+
+import main.GamePanel;
 public class npc_figures extends Character{
 
 	public npc_figures(GamePanel gp) {
@@ -13,18 +14,16 @@ public class npc_figures extends Character{
 	}
 	public void getChickImage() {
 		
-		left1 = setup("/npc/chick3-1");
-		left2 = setup("/npc/chick3-2");
-		left3 = setup("/npc/chick3-3");
-		left4 = setup("/npc/chick3-4");
-		right1 = setup("/npc/chick2-1");
-		right2 = setup("/npc/chick2-2");
-		right3 = setup("/npc/chick2-3");
-		right4 = setup("/npc/chick2-4");
+		left1 = setup("/npc/chick3-1", gp.tileSize, gp.tileSize);
+		left2 = setup("/npc/chick3-2", gp.tileSize, gp.tileSize);
+
+		right1 = setup("/npc/chick2-1", gp.tileSize, gp.tileSize);
+		right2 = setup("/npc/chick2-2", gp.tileSize, gp.tileSize);
+		
 	}
 	
 	public void setAction() {
-		Timer++;
+		Timer++; //actionlockcounter
 		if(Timer == 240 ) {//4s
 			Random random = new Random();
 			int j = random.nextInt(100)+1;

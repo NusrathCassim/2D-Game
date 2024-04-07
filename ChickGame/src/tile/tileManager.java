@@ -1,13 +1,14 @@
 package tile;
-import main.ToolBox;
 import java.awt.Graphics2D;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
 
 import javax.imageio.ImageIO;
+
 import main.GamePanel;
+import main.ToolBox;
 
 public class tileManager {
 	GamePanel gp;
@@ -36,7 +37,7 @@ public class tileManager {
 	public void getTileImage() {
 		//load the tile images
 		
-			setup(0, "f1", true);
+			setup(0, "f1", false);
 			setup(1, "f2", false);
 			setup(2, "f3", true);
 			setup(3, "f4", false);
@@ -61,7 +62,7 @@ public class tileManager {
 			setup(22, "w7", true);
 			setup(23, "w8", true);
 			setup(24, "w9", true);
-			setup(25, "j1", false);
+			setup(25, "j1", true);
 			setup(26, "j2", true);
 			setup(27, "j3", true);
 			setup(28, "j4", true);
