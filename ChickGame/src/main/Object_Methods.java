@@ -11,7 +11,7 @@ import object.specialObject;
 public class Object_Methods {
 	GamePanel gp;
 	Random random = new Random();
-
+	int Timer =0 ;
 	
 	public Object_Methods(GamePanel gp) {
 		this.gp = gp;
@@ -55,11 +55,14 @@ public class Object_Methods {
 		
 	}
 	public void setMonster() {
-		gp.Monster[0] = new m_redBean(gp);
-		gp.Monster[0].x = gp.tileSize*17;
-		gp.Monster[0].y = gp.tileSize*11;
-		gp.Monster[1] = new m_redBean(gp);
-		gp.Monster[1].x = gp.tileSize*14;
-		gp.Monster[1].y = gp.tileSize*10;
+		
+			gp.Monster[0] = new m_redBean(gp);
+			gp.Monster[0].x = gp.tileSize*17;
+			gp.Monster[0].y = gp.tileSize*11;
+			gp.Monster[1] = new m_redBean(gp);
+			gp.Monster[1].x = gp.tileSize*14;
+			gp.Monster[1].y = gp.tileSize*10;
+		
+		
 	}
 }
