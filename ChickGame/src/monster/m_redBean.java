@@ -73,6 +73,7 @@ public class m_redBean extends Character{
 				
 			}
 		}
+		
 		spriteCounter++;
 		if(spriteCounter > 20) {
 			if(spriteNum == 1) {
@@ -83,9 +84,6 @@ public class m_redBean extends Character{
 			else if (spriteNum == 3) {
 				spriteNum = 1;
 			}
-//			else if (spriteNum == 4) {
-//				spriteNum = 1;
-//			}
 			spriteCounter = 0;
 		}
 		if(invincible == true) {
@@ -116,4 +114,11 @@ public class m_redBean extends Character{
 			Timer = 0;
 		}
 	}
-}
+	
+	
+	//DAMAGE 
+	public void damageReaction() {
+		Timer = 0;
+		Direction = gp.player.Direction;
+	}
+	}
