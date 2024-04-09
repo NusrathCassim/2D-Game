@@ -3,6 +3,7 @@ import java.util.Random;
 
 import Character.Character;
 import main.GamePanel;
+import object.obj_redBean;
 
 public class m_redBean extends Character{
 	GamePanel gp; //update
@@ -15,7 +16,7 @@ public class m_redBean extends Character{
 		MAXLIFE = 3;
 		LIFE = MAXLIFE;
 		type = 2; 
-		
+		project = new obj_redBean(gp);
 		protectedArea.x = 8;
 		protectedArea.y = 18;
 		protectedArea.width = 30;
@@ -93,32 +94,73 @@ public class m_redBean extends Character{
 				invincibleCounter = 0;
 			}
 		}
+		
+		int xDistance = Math.abs(x - gp.player.x);
+		int yDistance = Math.abs(y - gp.player.y);
+		int tileDistance = (xDistance - yDistance)/gp.tileSize;
+		if(onPath == false && tileDistance < 3) {
+			int i = new Random().nextInt(100)+1;
+			if(i > 50) {
+				onPath = true;
+			}
+			
+		}
+		
+		//IF MONSTER ABANDONT THE PLAYER
+		if(onPath == true && tileDistance > 10) {
+		
+				onPath = false;
+			
+		}
+		
+		
+		
+		
+		
 	}
 	public void setAction() {
-		Timer++;
-		if(Timer == 120 ) {//4s
-			Random random = new Random();
-			int j = random.nextInt(100)+1;
-			if(j <=25 ) {
-				Direction = "left";
+		if(onPath == true) {
+			int goalCol = (gp.player.x + gp.player.protectedArea.x)/gp.tileSize;
+			int goalRow = (gp.player.y + gp.player.protectedArea.y)/gp.tileSize;
+			
+			searchPath(goalCol, goalRow);
+			
+			int i = new Random(). nextInt(200)+1;
+			if(i > 99 && project.alive == false) {
+				project.set(x, y, Direction, true, this);
+				gp.projectileList.add(project);
+				
 			}
-			if(j> 25 && j <= 50) {
-				Direction = "right";
+		}else {
+			Timer++;
+			if(Timer == 120 ) {//2s
+				Random random = new Random();
+				int j = random.nextInt(100)+1;
+				if(j <=25 ) {
+					Direction = "left";
+				}
+				if(j> 25 && j <= 50) {
+					Direction = "right";
+				}
+				if(j> 50 && j <= 75) {
+					Direction = "up";
+				}
+				if(j> 75 && j <= 100) {
+					Direction = "down";
+				}
+				Timer = 0;
+				
+				
 			}
-			if(j> 50 && j <= 75) {
-				Direction = "up";
-			}
-			if(j> 75 && j <= 100) {
-				Direction = "down";
-			}
-			Timer = 0;
 		}
+		
+		
 	}
 	
 	
 	//DAMAGE 
 	public void damageReaction() {
 		Timer = 0;
-		Direction = gp.player.Direction;
+		onPath = true; 
 	}
 	}
