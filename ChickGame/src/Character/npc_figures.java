@@ -16,12 +16,24 @@ public class npc_figures extends Character{
 		
 		left1 = setup("/npc/chick3-1", gp.tileSize, gp.tileSize);
 		left2 = setup("/npc/chick3-2", gp.tileSize, gp.tileSize);
-
+		left3 = setup("/npc/chick3-1", gp.tileSize, gp.tileSize);
+		
 		right1 = setup("/npc/chick2-1", gp.tileSize, gp.tileSize);
 		right2 = setup("/npc/chick2-2", gp.tileSize, gp.tileSize);
-		
+		right3 = setup("/npc/chick2-1", gp.tileSize, gp.tileSize);
 	}
-	
+//	public void update() {
+//		spriteCounter++;
+//		if(spriteCounter > 20) {
+//			if(spriteNum == 1) {
+//				spriteNum=2;
+//			}else if(spriteNum==2) {
+//				spriteNum = 1;
+//			}
+//			spriteCounter = 0;
+//		}
+//	}
+//	
 	public void setAction() {
 		Timer++; //actionlockcounter
 		if(Timer == 240 ) {//4s
