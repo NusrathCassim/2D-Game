@@ -4,6 +4,7 @@ import java.util.Random;
 
 import Character.npc_figure_2;
 import Character.npc_figures;
+import monster.Bigslime;
 import monster.m_redBean;
 import object.Object_rock;
 import object.specialObject;
@@ -59,10 +60,21 @@ public class Object_Methods {
 			gp.Monster[0] = new m_redBean(gp);
 			gp.Monster[0].x = gp.tileSize*17;
 			gp.Monster[0].y = gp.tileSize*11;
+			
 			gp.Monster[1] = new m_redBean(gp);
 			gp.Monster[1].x = gp.tileSize*14;
 			gp.Monster[1].y = gp.tileSize*10;
 		
+			
+			gp.Monster[2] = new Bigslime(gp);
+			gp.Monster[2].x = gp.tileSize*12;
+			gp.Monster[2].y = gp.tileSize*11;
 		
 	}
+//	public void setBigSlime() {
+//		
+//		
+//	}
+	      
+	
 }
