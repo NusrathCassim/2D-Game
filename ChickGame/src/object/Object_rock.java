@@ -9,7 +9,7 @@ public class Object_rock extends Character{
 		super(gp);
 		
 		name = "rock_lv1";
-		image = setup("/objects/FireRock");
+		image = setup("/objects/FireRock", gp.tileSize, gp.tileSize);
 		
 	}
 }
