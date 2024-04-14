@@ -66,15 +66,14 @@ public class Object_Methods {
 			gp.Monster[1].y = gp.tileSize*10;
 		
 			
-			gp.Monster[2] = new Bigslime(gp);
-			gp.Monster[2].x = gp.tileSize*12;
-			gp.Monster[2].y = gp.tileSize*11;
+			
 		
 	}
-//	public void setBigSlime() {
-//		
-//		
-//	}
+	public void setBigSlime() {
+		gp.Monster[2] = new Bigslime(gp);
+		gp.Monster[2].x = gp.tileSize*12;
+		gp.Monster[2].y = gp.tileSize*11;
+	}
 	      
 	
 }
