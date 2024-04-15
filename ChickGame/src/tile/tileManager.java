@@ -17,7 +17,7 @@ public class tileManager {
 	
 	public tileManager(GamePanel gp) {
 		this.gp = gp;
-		tile= new Tile[75]; //can change this number
+		tile= new Tile[80]; //can change this number
 		mapT_Num = new int[gp.maxScreenCol][gp.maxScreenRow];
 		getTileImage();
 		loadingMap("/map/map.txt");
@@ -112,6 +112,15 @@ public class tileManager {
 			setup(69, "f14", false);
 			setup(70, "f0", false);
 			setup(71, "g6", false);
+			
+			//right corner
+			setup(72, "rightC1", true);
+			setup(73, "rightC2", true);
+			setup(74, "rightC3", true);
+			setup(75, "rightC4", true);
+			setup(76, "rightC5", true);
+			setup(77, "rightC6", true);
+			
 			
 			
 	}
