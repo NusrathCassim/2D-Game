@@ -12,7 +12,8 @@ public class m_redBean extends Character{
 		this.gp = gp;
 		Direction = "left";
 		name = "RedBean";
-		speed = 1;
+		defaultSpeed = 1;
+		speed = defaultSpeed;
 		MAXLIFE = 3;
 		LIFE = MAXLIFE;
 		type = 2; 
@@ -27,11 +28,11 @@ public class m_redBean extends Character{
 	}
 	public void getImage() {
 		up1 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
-		up2 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
-		up3 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		up2 =  setup("/monster/Monster2", gp.tileSize, gp.tileSize);
+		up3 =  setup("/monster/Monster3", gp.tileSize, gp.tileSize);
 		down1 = setup("/monster/Monster1", gp.tileSize, gp.tileSize);
-		down2= setup("/monster/Monster1", gp.tileSize, gp.tileSize);
-		down3 =  setup("/monster/Monster1", gp.tileSize, gp.tileSize);
+		down2= setup("/monster/Monster2", gp.tileSize, gp.tileSize);
+		down3 =  setup("/monster/Monster3", gp.tileSize, gp.tileSize);
 		
 		left1 = setup("/monster/Monster1", gp.tileSize, gp.tileSize);
 		left2 = setup("/monster/Monster2", gp.tileSize, gp.tileSize);
@@ -42,89 +43,22 @@ public class m_redBean extends Character{
 	}
 	//update methods here, sprite no are different from default one
 	public void update() {
-		setAction();
-		collisionOn = false;
-		gp.checker.checkTile(this);
-		gp.checker.checkEntity(this, gp.Monster);
-		boolean contactPlayer = gp.checker.checkPlayer(this);
 		
-		
-		if(this.type == 2 && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				gp.player.LIFE -=1;
-				gp.player.invincible = true;
-			}
-		}
-		if(collisionOn == false) {
-			switch(Direction) {
-			case "left":
-				x-= speed;	
-					break;								
-			case "right": 
-				if((x + gp.tileSize) < gp.screenWidth) {
-					x+= speed;	
-					break;
-					}
-			case "up":
-				y -=speed;
-				break;
-			case "down":
-				y += speed;
-				break;
-				
-			}
-		}
-		
-		spriteCounter++;
-		if(spriteCounter > 20) {
-			if(spriteNum == 1) {
-				spriteNum=2;
-			}else if(spriteNum==2) {
-				spriteNum = 3;
-			}
-			else if (spriteNum == 3) {
-				spriteNum = 1;
-			}
-			spriteCounter = 0;
-		}
-		if(invincible == true) {
-			invincibleCounter++;
-			if(invincibleCounter > 40){ 
-				invincible = false;
-				invincibleCounter = 0;
-			}
-		}
-		
-		int xDistance = Math.abs(x - gp.player.x);
-		int yDistance = Math.abs(y - gp.player.y);
-		int tileDistance = (xDistance - yDistance)/gp.tileSize;
-		if(onPath == false && tileDistance < 3) {
-			int i = new Random().nextInt(100)+1;
-			if(i > 50) {
-				onPath = true;
-			}
-			
-		}
-		
+		super.update();
+		VerifyStartCasing(gp.player, 3, 100);
 		//IF MONSTER ABANDONT THE PLAYER
-		if(onPath == true && tileDistance > 10) {
-		
-				onPath = false;
-			
+		if(onPath == true) {
+		VerifystopChaseStatus(gp.player, 10, 100);
 		}
-		
-		
-		
-		
 		
 	}
 	public void setAction() {
 		if(onPath == true) {
-			int goalCol = (gp.player.x + gp.player.protectedArea.x)/gp.tileSize;
-			int goalRow = (gp.player.y + gp.player.protectedArea.y)/gp.tileSize;
+			//search a direction to go
+			searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
 			
-			searchPath(goalCol, goalRow);
 			
+			//check if its shoots
 			int i = new Random(). nextInt(200)+1;
 			if(i > 99 && project.alive == false) {
 				project.set(x, y, Direction, true, this);
@@ -132,28 +66,9 @@ public class m_redBean extends Character{
 				
 			}
 		}else {
-			Timer++;
-			if(Timer == 120 ) {//2s
-				Random random = new Random();
-				int j = random.nextInt(100)+1;
-				if(j <=25 ) {
-					Direction = "left";
-				}
-				if(j> 25 && j <= 50) {
-					Direction = "right";
-				}
-				if(j> 50 && j <= 75) {
-					Direction = "up";
-				}
-				if(j> 75 && j <= 100) {
-					Direction = "down";
-				}
-				Timer = 0;
-				
-				
-			}
+			//get Random Direction
+			getRandomDirection();
 		}
-		
 		
 	}
 	
