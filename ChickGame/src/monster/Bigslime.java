@@ -38,9 +38,9 @@ public class Bigslime extends Character {
 	    left1 = setup("/monster/Bigslime1", monsterSize, monsterSize);
 	    left2 = setup("/monster/Bigslime2", monsterSize, monsterSize);
 	    left3 = setup("/monster/Bigslime1", monsterSize, monsterSize);
-	    right1 = setup("/monster/Bigslime1", monsterSize, monsterSize);
-	    right2 = setup("/monster/Bigslime2", monsterSize, monsterSize);
-	    right3 = setup("/monster/Bigslime1", monsterSize, monsterSize);
+	    right1 = setup("/monster/Bigslime3", monsterSize, monsterSize);
+	    right2 = setup("/monster/Bigslime4", monsterSize, monsterSize);
+	    right3 = setup("/monster/Bigslime3", monsterSize, monsterSize);
 	}
 //	public void update() {
 //		
