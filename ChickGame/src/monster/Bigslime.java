@@ -3,6 +3,7 @@ import java.util.Random;
 
 import Character.Character;
 import main.GamePanel;
+import object.obj_blueBean;
 
 public class Bigslime extends Character {
 	GamePanel gp;
@@ -15,7 +16,7 @@ public class Bigslime extends Character {
 		MAXLIFE = 10;
 		LIFE = MAXLIFE;
 		type = 1;
-		//project = new obj_Bigslime(gp);
+		project = new obj_blueBean(gp);
 		
 		protectedArea.x = 4;
 		protectedArea.y = 12;
@@ -49,18 +50,36 @@ public class Bigslime extends Character {
 //		
 //	}
 	public void setAction() {
+		
 		Timer++; //actionlockcounter
 		if(Timer == 240 ) {//4s
 			Random random = new Random();
 			int j = random.nextInt(100)+1;
-			if(j <=50) {
-				Direction = "left";
+			if(j <=25 ) {Direction = "left";}
+			if(j> 25 && j <= 50) {Direction = "right";}
+			if(j> 50 && j <= 75) {
+				Direction = "up";
 			}
-			if(j> 50 && j <= 100) {
-				Direction = "right";
+			if(j> 75 && j <= 100) {
+				Direction = "down";
 			}
 			Timer = 0;
+			
+	
 		}
+		int i = new Random(). nextInt(200)+1;
+		if(i > 99 && project.alive == false) {
+			project.set(x, y, Direction, true, this);
+			gp.projectileList.add(project);
 		}
+		
+		
+		
+	}
+	
+    public void damageReaction() {
+		Timer++;
+		Direction = gp.player.Direction;
+	}
 
 }
