@@ -65,6 +65,7 @@ public class checkCollision {
 		public int checkObject(Character Character, boolean player) {
 			int index = 999;
 			
+			
 			for(int i =0; i<gp.obj.length; i++) {
 				if(gp.obj[i] != null ) {
 					//characters solid area position
