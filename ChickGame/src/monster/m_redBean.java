@@ -77,5 +77,5 @@ public class m_redBean extends Character{
 	public void damageReaction() {
 		Timer = 0;
 		onPath = true; 
-	}
+	 }
 	}
