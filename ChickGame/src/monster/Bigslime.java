@@ -57,12 +57,8 @@ public class Bigslime extends Character {
 			int j = random.nextInt(100)+1;
 			if(j <=25 ) {Direction = "left";}
 			if(j> 25 && j <= 50) {Direction = "right";}
-			if(j> 50 && j <= 75) {
-				Direction = "up";
-			}
-			if(j> 75 && j <= 100) {
-				Direction = "down";
-			}
+			if(j> 50 && j <= 75) {Direction = "up";}
+			if(j> 75 && j <= 100) {Direction = "down";}
 			Timer = 0;
 			
 	
