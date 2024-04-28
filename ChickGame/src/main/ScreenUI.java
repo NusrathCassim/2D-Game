@@ -67,6 +67,26 @@ public class ScreenUI {
 		if(gp.gameState == gp.MainState) {
 			drawMainScreen();
 		}
+		//game win state
+		if(gp.gameState == gp.gameWin) {
+			drawGameWinScreen();
+		}
+	}
+	private void drawGameWinScreen() {
+		g2.setColor(new Color(0,0,0,150));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		int x, y;
+		String text;
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80f));
+		text = "CONGRATULATIONS!";
+		//shadow
+				g2.setColor(Color.black);
+				x = getCenterX(text);
+				y = gp.tileSize*4;
+				g2.drawString(text, x, y);
+				//main
+				g2.setColor(Color.YELLOW);
+				g2.drawString(text, x-4, y-4);
 	}
 	public void drawMainScreen() {
 		g2.setColor(new Color(0,0,0));
