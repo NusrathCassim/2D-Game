@@ -39,7 +39,8 @@ public class KeyHandler implements KeyListener {
 				if(code == KeyEvent.VK_ENTER) {
 					if(gp.ui.commandNum ==0) {
 						gp.gameState =gp.playMode;
-						//gp.playSE(1);
+						gp.playSE(1);
+						
 					}
 					if(gp.ui.commandNum ==1) {
 						System.exit(0);
@@ -79,6 +80,7 @@ public class KeyHandler implements KeyListener {
 		else if(gp.gameState == gp.pauseMode) {
 			if(code ==  KeyEvent.VK_P) {
 				 gp.gameState = gp.playMode;
+				 
 			}
 		}
 		else if(gp.gameState == gp.gameoverState) {
