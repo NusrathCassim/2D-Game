@@ -78,7 +78,7 @@ public class ScreenUI {
 		int x, y;
 		String text;
 		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 80f));
-		text = "CONGRATULATIONS!";
+		text = "YOU WIN!!";
 		//shadow
 				g2.setColor(Color.black);
 				x = getCenterX(text);
