@@ -5,6 +5,7 @@ Stay focused as all the action unfolds within a fixed game display, ensuring eve
 ## Gameplay Instructions:
 - Use W|A|S|D to move the player character.
 - To perform the default attack, press the 'Enter' key.
+- Press 'p' to pause
 - Press the "F" to shoot projectiles at monsters.
 - Avoid contact with monsters, as it will reduce your health.
 - Collect power-ups [🥕carrot item] to replenish health or gain temporary boosts.
