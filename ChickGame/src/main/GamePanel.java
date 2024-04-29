@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
                 
     }
-  
+ 
     
     //SETTING UP THE GAME
     public void setupObject() {
@@ -85,7 +85,8 @@ public class GamePanel extends JPanel implements Runnable {
     	methods.setMonster();
     	
     	
-    	//playMusic(1);
+    	
+    	
     	gameState = MainState;
     }
     public void retry() {
