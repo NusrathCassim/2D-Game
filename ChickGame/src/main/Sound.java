@@ -18,6 +18,8 @@ public class Sound {
 		soundURL[5] = getClass().getResource("/sound/swing.wav");
 		soundURL[6] = getClass().getResource("/sound/carrot.wav");
 		soundURL[7] = getClass().getResource("/sound/rotate.wav");
+		soundURL[8] = getClass().getResource("/sound/Win.wav");
+		soundURL[9] = getClass().getResource("/sound/gameOver.wav");
 	}
 	public void setFile(int i) {
 		try {
