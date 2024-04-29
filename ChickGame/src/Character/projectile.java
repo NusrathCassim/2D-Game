@@ -23,7 +23,7 @@ Character user;
 		if(user == gp.player ) {
 			int monsterIndex = gp.checker.checkEntity(this, gp.Monster);
 			if(monsterIndex != 999 ) {
-				gp.player.damageMonster(monsterIndex);
+				gp.player.damageMonster(monsterIndex, gp.player);
 				//ONCE HITS MONSTER IT DISSAPEAR
 				alive = false;
 			}
