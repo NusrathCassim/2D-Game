@@ -204,11 +204,14 @@ public class Player extends Character {
 			//GAMEOVER FRAME
 			if(LIFE <= 0) {
 				gp.gameState = gp.gameoverState;
+				gp.playSE(9);
+				
 			}
 			//GAME WINFrame
 			if(gp.Monster[0] == null && gp.Monster[1] == null &&gp.Monster[2] == null && gp.Monster[3] == null
 					&& gp.Monster[4] == null && LIFE > 0 ) {
 				gp.gameState = gp.gameWin;
+				gp.playSE(8);
 			}
 			
 			
@@ -238,7 +241,7 @@ public class Player extends Character {
 			 solidAreaHeigh = protectedArea.height;
 			 //check monster collision with updated data
 			 int monsterIndex = gp.checker.checkEntity(this, gp.Monster);
-			 damageMonster(monsterIndex);
+			 damageMonster(monsterIndex, this);
 			 x = currentx;
 			 y = currenty;
 			 protectedArea.width = solidAreaWidth;
@@ -336,11 +339,11 @@ public class Player extends Character {
 			return diedMonsters;
 			//System.out.println(diedMonsters);
 		}
-		public void damageMonster(int i) {
+		public void damageMonster(int i, Character attacker) {
 			if(i != 999) {
 				
 				if(gp.Monster[i].invincible == false) {
-					knockBack(gp.Monster[i]);
+					knockBack(gp.Monster[i], attacker);
 					if(gp.Monster[i].type == 1) {gp.Monster[i].LIFE -= 2;}
 					else {gp.Monster[i].LIFE -= 1;}
 					gp.Monster[i].damageReaction();
@@ -357,13 +360,7 @@ public class Player extends Character {
 				//MISS THE DIRECT AX ATTACK
 			}
 		}
-		private void knockBack(Character Character) {
-			Character.Direction = Direction;
-			Character.speed +=10;
-			Character.knockback = true;
-			
-		}
-
+	
 		public void draw(Graphics2D g2) {
 			BufferedImage image = null;
 			int tempx = x;
