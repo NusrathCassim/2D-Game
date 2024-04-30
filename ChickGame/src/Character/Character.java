@@ -34,8 +34,8 @@ public class Character {
 	public int dyingCounter = 0;
 	public int diedMonsters = 0;
 	public int hitcount = 0;
-	
-
+	public Character attacker;
+	public String knockbackDirection;
 	public boolean invincible = false;
 	boolean attacking = false;
 	public boolean specialAttack = false;
@@ -105,7 +105,7 @@ public class Character {
 			else if(collisionOn == false) {
 				int bottom_player = y + gp.tileSize;
 				int right_player = x + gp.tileSize;
-				switch(gp.player.Direction) {
+				switch(knockbackDirection) {
 				case "up":if(y > 0) {y-= speed;break; }
 				case "down":if(bottom_player < gp.screenHeight) {y+= speed;	break;}
 				case "left":if(x > 0) {x-= speed;break;}
@@ -371,7 +371,16 @@ public class Character {
 	public boolean isSpecialAttack() {
 	    return specialAttack;
 	}
-	
+	public void knockBack(Character Character, Character attacker) {
+		//Character.Direction = Direction;
+		this.attacker= attacker;
+		Character.knockbackDirection = attacker.Direction;
+		
+		Character.speed +=10;
+		Character.knockback = true;
+		
+	}
+
 	
 	
 }
