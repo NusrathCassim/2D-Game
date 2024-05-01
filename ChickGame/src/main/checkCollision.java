@@ -19,7 +19,15 @@ public class checkCollision {
 		int ChBottomRow = ChBottomY/gp.tileSize;
 		
 		int tileNum1, tileNum2;
-		switch(Character.Direction) {
+		String Direction = Character.Direction;
+		if(Character.knockback == true) {
+			Direction = Character.knockbackDirection;
+		}
+		
+		
+		
+		
+		switch(Direction) {
 		
 		case "up":
 			ChTopRow = (ChTopY - Character.speed)/gp.tileSize;
@@ -64,7 +72,10 @@ public class checkCollision {
 		
 		public int checkObject(Character Character, boolean player) {
 			int index = 999;
-			
+			String Direction = Character.Direction;
+			if(Character.knockback == true) {
+				Direction = Character.knockbackDirection;
+			}
 			
 			for(int i =0; i<gp.obj.length; i++) {
 				if(gp.obj[i] != null ) {
@@ -78,7 +89,7 @@ public class checkCollision {
 					gp.obj[i].protectedArea.y = gp.obj[i].obj_y + gp.obj[i].protectedArea.y;
 					
 					
-					switch(Character.Direction) {
+					switch(Direction) {
 					case "up":
 						Character.protectedArea.y -= Character.speed;
 						break;
@@ -113,7 +124,11 @@ public class checkCollision {
 		//MOSTER AND
 		public int checkEntity(Character Character, Character[] target) {
 				int index = 999;
-			
+				String Direction = Character.Direction;
+				if(Character.knockback == true) {
+					Direction = Character.knockbackDirection;
+				}
+				
 			for(int i =0; i<target.length; i++) {
 				if(target[i] != null ) {
 					//characters solid area position
@@ -126,7 +141,7 @@ public class checkCollision {
 					target[i].protectedArea.y = target[i].y + target[i].protectedArea.y;
 					
 					
-					switch(Character.Direction) {
+					switch(Direction) {
 					case "up":Character.protectedArea.y -= Character.speed; break;
 					case "down":Character.protectedArea.y += Character.speed; break;
 					case "left": Character.protectedArea.x -= Character.speed;break;
@@ -150,6 +165,11 @@ public class checkCollision {
 		}
 		
 		public boolean checkPlayer(Character Character) {
+			String Direction = Character.Direction;
+			if(Character.knockback == true) {
+				Direction = Character.knockbackDirection;
+			}
+			
 			boolean contactPlayer = false;
 			//characters solid area position
 			Character.protectedArea.x = Character.x + Character.protectedArea.x;
@@ -161,7 +181,7 @@ public class checkCollision {
 			gp.player.protectedArea.y = gp.player.y + gp.player.protectedArea.y;
 			
 			
-			switch(Character.Direction) {
+			switch(Direction) {
 			case "up":Character.protectedArea.y -= Character.speed; break;
 			case "down":Character.protectedArea.y += Character.speed; break;
 			case "left": Character.protectedArea.x -= Character.speed;break;
