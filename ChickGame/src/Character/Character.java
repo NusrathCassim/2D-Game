@@ -299,14 +299,6 @@ public class Character {
 						Direction = "right";
 					}
 				}
-				//if reach the goal
-//				int nextCol = gp.pathfinder.pathList.get(0).col;
-//				int nextRow = gp.pathfinder.pathList.get(0).row;
-//				
-//				if(nextCol == goalCol && nextRow == goalRow) {
-//					onPath = false;
-//				}
-			
 			
 		}
 		
