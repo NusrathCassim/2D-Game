@@ -1,7 +1,7 @@
-# MONSTER HUNT!
+# MONSTER HUNT!  
 
 <b>MONSTER HUNT!</b> is a simple 2D game made using JAVA where player emabark on a journey collecting <i> magical rocks.✨ </i> while defeating monsters,
-Stay focused as all the action unfolds within a fixed game display, ensuring every moment is packed with excitement!
+Stay focused as all the action unfolds within a fixed game display, ensuring every moment is packed with excitement! <a href="https://player.vimeo.com/video/1070727307?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">take a look</a>
 ## Gameplay Instructions:
 - Use W|A|S|D to move the player character.
 - To perform the default attack, press the 'Enter' key.
